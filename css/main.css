@@ -1,7 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Quattrocento:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700;800;900&family=Roboto:wght@400;500&display=swap");
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 h1,
@@ -9,7 +10,14 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+}
+
+h2,
+h3,
+h4,
+h5 {
   text-transform: uppercase;
 }
 
@@ -21,8 +29,53 @@ h3 {
   font-size: 3.4vh;
 }
 
+.section {
+  overflow: hidden;
+}
+
+.section .blur {
+  position: absolute;
+  height: 110%;
+  width: 110%;
+  -webkit-filter: blur(9px);
+          filter: blur(9px);
+  background-size: cover;
+  background-position: center;
+}
+
+.section.header-section .blur {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.5))), url("../img/sky.jpg");
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), url("../img/sky.jpg");
+  -webkit-transform: translate(-30px, -26%);
+          transform: translate(-30px, -26%);
+}
+
+.section.header-section .social-links {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2vh;
+}
+
+.section.header-section .social-links a svg {
+  width: 36px;
+  height: 36px;
+}
+
+.section.projects-section .blur {
+  background-image: linear-gradient(315deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url("../img/window.jpg");
+  -webkit-transform: translate(-30px, -5%);
+          transform: translate(-30px, -5%);
+}
+
+.section.skills-section .blur {
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%), url("../img/wtc.jpg");
+  -webkit-transform: translate(-30px, -12%);
+          transform: translate(-30px, -12%);
+}
+
 section {
-  padding: 7vh 0;
+  position: relative;
 }
 
 section .container {
@@ -32,6 +85,18 @@ section .container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 3vh 2vh;
+}
+
+section .container.text-container {
+  padding: 2vh 5vh;
+}
+
+section .container.text-container p {
+  width: 50%;
+  padding: 1vh 0 4vh;
+  line-height: 1.3;
+  font-size: 2vh;
 }
 
 @media (max-width: 768px) {
@@ -54,8 +119,8 @@ section button {
   color: black;
   border: 3px solid black;
   position: relative;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
@@ -103,41 +168,46 @@ section button::after {
 }
 
 section.header .container {
-  height: 100%;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+section.header .container .item {
+  max-width: 90vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 section.header .container .item img {
   border-radius: 50%;
   height: 40vh;
+  margin-left: 10vh;
 }
 
-section.header .container .item span {
-  font-size: 2.4vh;
+section.header .container .item .me-blurb {
+  padding: 0 10vh 0 10vh;
 }
 
 section.projects {
-  background: black;
   color: white;
 }
 
 section.projects .container {
-  height: 25%;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
 }
 
 section.projects .container.text-container {
-  padding: 2vh 5vh 8vh;
-}
-
-section.projects .container.text-container p {
-  width: 50%;
-  padding: 1vh 0 4vh;
-  line-height: 1.3;
-  font-size: 2.4vh;
+  padding-right: 30vw;
 }
 
 section.projects .container.cards {
@@ -152,8 +222,8 @@ section.projects .container.cards .card-wrap {
 section.projects .container.cards .card-wrap .card {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
-  background: white;
-  color: black;
+  background: transparent;
+  color: white;
   min-height: 45vh;
   padding: 2vh 2.4vw 5vh;
   border-radius: 48px;
@@ -166,15 +236,16 @@ section.projects .container.cards .card-wrap .card .card-screen {
 }
 
 section.projects .container.cards .card-wrap .card .card-screen svg {
-  width: 24vw;
+  width: 26vw;
+  fill: white;
 }
 
 section.projects .container.cards .card-wrap .card .card-screen .card-screen-shot {
   position: absolute;
-  top: 11vh;
+  top: 12vh;
   left: 1.5vw;
-  height: 22vh;
-  width: 21vw;
+  height: 24vh;
+  width: 23vw;
   border-radius: 12px;
   overflow-y: hidden;
 }
@@ -229,16 +300,16 @@ section.projects .container.cards .card-wrap .card .button-container {
 section.projects .container.cards .card-wrap .card .button-container button {
   margin: 1vh 0 0;
   background: transparent;
-  color: black;
-  border: 3px solid black;
+  color: white;
+  border: 3px solid white;
   position: relative;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
   text-transform: uppercase;
 }
 
 section.projects .container.cards .card-wrap .card .button-container button:hover {
-  color: white;
+  color: black;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
@@ -264,7 +335,7 @@ section.projects .container.cards .card-wrap .card .button-container button::bef
   content: "";
   width: 0;
   height: 0;
-  background: black;
+  background: white;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -280,24 +351,370 @@ section.projects .container.cards .card-wrap .card .button-container button::aft
   content: "Check it out";
 }
 
+section.skills {
+  padding-top: 0;
+  padding-bottom: 0;
+  color: white;
+  min-height: 80vh;
+}
+
+section.skills .container .item h3 {
+  margin-bottom: 2vh;
+}
+
+section.skills .container .item .skill-table-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item label {
+  position: relative;
+  z-index: 1;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item label svg {
+  height: 48px;
+  width: 48px;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item meter {
+  position: relative;
+  z-index: 1;
+  min-width: 25vw;
+  min-height: 4vh;
+  padding-left: 2vh;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item meter::-webkit-meter-bar {
+  background: rgba(0, 0, 0, 0.25);
+  /* Required to get rid of the default background property */
+  border: none;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item .skill-blurb-container {
+  position: absolute;
+  z-index: 10;
+  height: 110%;
+  width: 105%;
+  -webkit-clip-path: circle(0% at 4vh 2vh);
+          clip-path: circle(0% at 4vh 2vh);
+  -webkit-transform: translate(-2.5%, -5%);
+          transform: translate(-2.5%, -5%);
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item .skill-blurb-container .skill-blurb {
+  padding: 6vh 4vh 6vh 9vh;
+  background-color: white;
+  color: black;
+  border-radius: 24px;
+  -webkit-box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item:hover {
+  cursor: pointer;
+  z-index: 2;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item:hover label,
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item:hover meter {
+  z-index: 11;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item:hover label svg {
+  border-radius: 50%;
+  -webkit-transition: -webkit-box-shadow 0.35s ease-in-out;
+  transition: -webkit-box-shadow 0.35s ease-in-out;
+  transition: box-shadow 0.35s ease-in-out;
+  transition: box-shadow 0.35s ease-in-out, -webkit-box-shadow 0.35s ease-in-out;
+  -webkit-box-shadow: 0px 5px 20px -8px black;
+  box-shadow: 0px 5px 20px -8px black;
+}
+
+section.skills .container .item .skill-table-wrapper .skill-table .skill-table-item:hover .skill-blurb-container {
+  -webkit-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+  -webkit-clip-path: circle(110%);
+          clip-path: circle(110%);
+}
+
+section.skills .container.text-container {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-bottom: 0;
+}
+
+section.skills .container.text-container .item {
+  padding: 4vh 4vh 0 50vw;
+}
+
+section.skills .container.text-container .item p {
+  width: unset;
+}
+
+section.skills .container.web-container {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+section.skills .container.web-container .item {
+  padding: 1vh;
+}
+
+section.skills .container.web-container .web-tech,
+section.skills .container.web-container .applications {
+  padding: 0 4vh;
+}
+
+section.slide {
+  color: white;
+}
+
 section.slide a.back {
   position: absolute;
-  top: 1%;
-  left: 50%;
+  top: 0%;
+  left: 0%;
   padding: 2vh 3vh;
+  text-decoration: none;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 section.slide a.back svg {
   height: 24px;
   width: 24px;
+  fill: white;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 
 section.slide a.back:hover svg {
   -webkit-transform: translateX(-5px);
           transform: translateX(-5px);
-  -webkit-transition: -webkit-transform 1s ease;
-  transition: -webkit-transform 1s ease;
-  transition: transform 1s ease;
-  transition: transform 1s ease, -webkit-transform 1s ease;
+}
+
+section.slide a.back div {
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  -webkit-transition: border-bottom 0.5s ease;
+  transition: border-bottom 0.5s ease;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-left: 1vh;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+section.slide a.back:hover div {
+  border-bottom: 2px solid white;
+}
+
+section.slide a.next {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  padding: 2vh 3vh;
+  text-decoration: none;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+section.slide a.next svg {
+  height: 24px;
+  width: 24px;
+  fill: white;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+}
+
+section.slide a.next:hover svg {
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+}
+
+section.slide a.next div {
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  -webkit-transition: border-bottom 0.5s ease;
+  transition: border-bottom 0.5s ease;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: 1vh;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+section.slide a.next:hover div {
+  border-bottom: 2px solid white;
+}
+
+.left,
+.right,
+.slide-fade-up {
+  visibility: hidden;
+}
+
+.left {
+  -webkit-transform: translateX(-100vw);
+          transform: translateX(-100vw);
+}
+
+.right {
+  -webkit-transform: translateX(100vw);
+          transform: translateX(100vw);
+}
+
+.slide-fade-up {
+  -webkit-transform: translateY(100vh);
+          transform: translateY(100vh);
+}
+
+@-webkit-keyframes slideLeft {
+  from {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    -webkit-transform: translateX(-100vw);
+            transform: translateX(-100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@-webkit-keyframes slideRight {
+  from {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    -webkit-transform: translateX(100vw);
+            transform: translateX(100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@-webkit-keyframes slideFadeUp {
+  from {
+    -webkit-transform: translateY(100vh);
+            transform: translateY(100vh);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes slideFadeUp {
+  from {
+    -webkit-transform: translateY(100vh);
+            transform: translateY(100vh);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@-webkit-keyframes pullFocus {
+  from {
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+  }
+  to {
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+  }
+}
+
+@keyframes pullFocus {
+  from {
+    -webkit-filter: blur(100px);
+            filter: blur(100px);
+  }
+  to {
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+  }
 }
 /*# sourceMappingURL=main.css.map */

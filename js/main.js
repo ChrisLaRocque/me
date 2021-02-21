@@ -11,8 +11,10 @@ wraps.forEach(wrap => {
 
 	// Moving animation
 	wrap.addEventListener('mousemove', (e) => {
-		let xAxis = ((window.innerWidth / 2) - e.clientX) / 70;
-		let yAxis = ((window.innerHeight / 2) - e.clientY) / 90;
+		// console.log(e)
+		let xAxis = ((window.innerWidth / 2) - e.clientX) / 50;
+		let yAxis = ((window.innerHeight / 2) - e.clientY) / 50;
+
 		card.style.transform = `rotateX(${yAxis}deg) rotateY(${xAxis}deg)`
 	})
 
@@ -61,9 +63,76 @@ iconContainers.forEach(container => {
 // Fullpage
 new fullpage('#fullpage', {
 	//options here
+	licenseKey: '1F447BB1-4D004BDD-B7EFE2DF-8C8A359D',
 	autoScrolling:true,
 	navigation: false,
 	anchors: ['top', 'projects', 'skills'],
 	resetSliders: true,
+	resetSlidersKey: 'EABFDA98-73DE4B01-93828DBA-8CF7CEEA',
 	controlArrows: false,
 });
+
+// Observers
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+const slideIn = new IntersectionObserver(function(entries){
+	entries.forEach(entry => {
+		let leftSlideys = entry.target.querySelectorAll('.left');
+		let rightSlideys = entry.target.querySelectorAll('.right');
+		if(entry.intersectionRatio > 0){
+			leftSlideys.forEach(slidey => {
+				let length = getRandomArbitrary(1, 3)
+				slidey.style.animation = `slideLeft 2s forwards ease-in-out`;
+				slidey.style.animationDelay = `${length}s`;
+			})
+			rightSlideys.forEach(slidey => {
+				let length = getRandomArbitrary(0, 2)
+				slidey.style.animation = `slideRight 2s forwards ease-in-out`;
+				slidey.style.animationDelay = `${length}s`;
+			})
+		}
+		else {
+			leftSlideys.forEach(slidey => {
+				slidey.style.animation = 'none';
+			})
+			rightSlideys.forEach(slidey => {
+				slidey.style.animation = 'none';
+			})
+		}
+	});
+})
+const slideFadeUp = new IntersectionObserver(function(entries){
+	entries.forEach(entry => {
+		let randoDelay = Math.random().toFixed(2);
+		let slideys = entry.target.querySelectorAll('.slide-fade-up');
+		if(entry.intersectionRatio > 0){
+			for(let i = 0; i < slideys.length; i++){
+				slideys[i].style.animation = `slideFadeUp 1s forwards ease-in-out`
+				slideys[i].style.animationDelay = `${+(i * randoDelay)}s`
+			}
+		}
+	})
+})
+const pullFocus = new IntersectionObserver(function(entries) {
+	entries.forEach(entry => {
+		let blur = entry.target.querySelector('.blur')
+		// console.log('found a blur')
+		if(entry.intersectionRatio > 0){
+			blur.style.animation = `pullFocus 1s forwards ease-in-out`
+			// console.log('set the animation on', entry.target, " to ", entry.target.style.animation)
+		}
+	})
+})
+
+const skillsSection = document.querySelector('.skills');
+const skillTables = document.querySelectorAll('.skill-table')
+const sections = document.querySelectorAll('.section')
+
+slideIn.observe(skillsSection)
+skillTables.forEach(skillTable => {
+	slideFadeUp.observe(skillTable)
+})
+// sections.forEach(section => {
+// 	pullFocus.observe(section)
+// })

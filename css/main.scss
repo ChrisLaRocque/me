@@ -1,13 +1,13 @@
 @import "mixins";
 @import "icons";
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Quattrocento:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;600;700;800;900&family=Roboto:wght@400;500&display=swap");
 @mixin button($bg, $color, $hoverColor, $text, $postText) {
   background: $bg;
   color: $color;
   border: 3px solid $color;
   position: relative;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 800;
   text-transform: uppercase;
   &:hover {
     color: $hoverColor;
@@ -48,13 +48,20 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 h1,
 h2,
 h3,
 h4,
 h5 {
-  font-family: "Oswald", sans-serif;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+}
+h2,
+h3,
+h4,
+h5 {
   text-transform: uppercase;
 }
 h2 {
@@ -63,12 +70,74 @@ h2 {
 h3 {
   font-size: 3.4vh;
 }
+.section {
+  overflow: hidden;
+  .blur {
+    position: absolute;
+    height: 110%;
+    width: 110%;
+    filter: blur(9px);
+    background-size: cover;
+    background-position: center;
+    // transition: all 2s ease-in-out;
+  }
+  &.header-section {
+    .blur {
+      background-image: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.5) 100%
+        ),
+        url("../img/sky.jpg");
+      transform: translate(-30px, -26%);
+    }
+    .social-links {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 2vh;
+      a {
+        svg {
+          width: 36px;
+          height: 36px;
+        }
+      }
+    }
+  }
+  &.projects-section .blur {
+    background-image: linear-gradient(
+        315deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.75) 100%
+      ),
+      url("../img/window.jpg");
+    transform: translate(-30px, -5%);
+  }
+  &.skills-section .blur {
+    background-image: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.75) 100%
+      ),
+      url("../img/wtc.jpg");
+    transform: translate(-30px, -12%);
+  }
+}
 section {
-  // height: 100vh;
-  padding: 7vh 0;
+  position: relative;
   .container {
     display: flex;
     align-items: center;
+    padding: 3vh 2vh;
+    &.text-container {
+      padding: 2vh 5vh;
+      p {
+        width: 50%;
+        padding: 1vh 0 4vh;
+        line-height: 1.3;
+        font-size: 2vh;
+      }
+    }
     @include phone {
       flex-direction: column;
     }
@@ -83,33 +152,29 @@ section {
   }
   &.header {
     .container {
-      height: 100%;
-      justify-content: space-around;
+      justify-content: center;
       .item {
+        max-width: 90vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         img {
           border-radius: 50%;
           height: 40vh;
+          margin-left: 10vh;
         }
-        span {
-          font-size: 2.4vh;
+        .me-blurb {
+          padding: 0 10vh 0 10vh;
         }
       }
     }
   }
   &.projects {
-    background: black;
     color: white;
     .container {
-      height: 25%;
       justify-content: space-evenly;
       &.text-container {
-        padding: 2vh 5vh 8vh;
-        p {
-          width: 50%;
-          padding: 1vh 0 4vh;
-          line-height: 1.3;
-          font-size: 2.4vh;
-        }
+        padding-right: 30vw;
       }
       &.cards {
         height: 50%;
@@ -117,8 +182,8 @@ section {
           perspective: 2000px;
           .card {
             transform-style: preserve-3d;
-            background: white;
-            color: black;
+            background: transparent;
+            color: white;
             min-height: 45vh;
             padding: 2vh 2.4vw 5vh;
             border-radius: 48px;
@@ -126,14 +191,15 @@ section {
               position: relative;
               transition: all 0.3s ease;
               svg {
-                width: 24vw;
+                width: 26vw;
+                fill: white;
               }
               .card-screen-shot {
                 position: absolute;
-                top: 11vh;
+                top: 12vh;
                 left: 1.5vw;
-                height: 22vh;
-                width: 21vw;
+                height: 24vh;
+                width: 23vw;
                 border-radius: 12px;
                 overflow-y: hidden;
                 img {
@@ -168,8 +234,8 @@ section {
                 margin: 1vh 0 0;
                 @include button(
                   transparent,
-                  black,
                   white,
+                  black,
                   "Check it out",
                   "Check it out again"
                 );
@@ -180,20 +246,238 @@ section {
       }
     }
   }
+  &.skills {
+    padding-top: 0;
+    padding-bottom: 0;
+    color: white;
+    min-height: 80vh;
+    .container {
+      .item {
+        h3 {
+          margin-bottom: 2vh;
+        }
+        .skill-table-wrapper {
+          display: flex;
+          justify-content: space-evenly;
+          .skill-table {
+            // overflow-y: hidden;
+            .skill-table-item {
+              display: flex;
+              align-items: center;
+              position: relative;
+              z-index: 1;
+              label {
+                position: relative;
+                z-index: 1;
+                svg {
+                  height: 48px;
+                  width: 48px;
+                }
+              }
+              meter {
+                position: relative;
+                z-index: 1;
+                min-width: 25vw;
+                min-height: 4vh;
+                padding-left: 2vh;
+                // -webkit-appearance: none;
+              }
+              meter::-webkit-meter-bar {
+                background: rgba(
+                  0,
+                  0,
+                  0,
+                  0.25
+                ); /* Required to get rid of the default background property */
+                border: none;
+              }
+              .skill-blurb-container {
+                position: absolute;
+                z-index: 10;
+                height: 110%;
+                width: 105%;
+                clip-path: circle(0% at 4vh 2vh);
+                transform: translate(-2.5%, -5%);
+                .skill-blurb {
+                  padding: 6vh 4vh 6vh 9vh;
+                  background-color: white;
+                  color: black;
+                  border-radius: 24px;
+                  -webkit-box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+                  box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+                }
+              }
+              &:hover {
+                cursor: pointer;
+                z-index: 2;
+                label,
+                meter {
+                  z-index: 11;
+                }
+                label {
+                  svg {
+                    border-radius: 50%;
+                    transition: box-shadow 0.35s ease-in-out;
+                    -webkit-box-shadow: 0px 5px 20px -8px rgba(0, 0, 0, 1);
+                    box-shadow: 0px 5px 20px -8px rgba(0, 0, 0, 1);
+                  }
+                }
+                .skill-blurb-container {
+                  transition: all 0.7s ease-in-out;
+                  clip-path: circle(110%);
+                }
+              }
+            }
+          }
+        }
+      }
+      &.text-container {
+        justify-content: flex-end;
+        padding-bottom: 0;
+        .item {
+          padding: 4vh 4vh 0 50vw;
+          p {
+            width: unset;
+          }
+        }
+      }
+      &.web-container {
+        justify-content: space-around;
+        align-items: flex-end;
+        .item {
+          padding: 1vh;
+        }
+        .web-tech,
+        .applications {
+          padding: 0 4vh;
+        }
+      }
+    }
+  }
   &.slide {
+    color: white;
     a.back {
       position: absolute;
-      top: 1%;
-      left: 50%;
+      top: 0%;
+      left: 0%;
       padding: 2vh 3vh;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-content: center;
       svg {
         height: 24px;
         width: 24px;
+        fill: white;
+        transform: translateX(0);
+        transition: transform 0.5s ease;
       }
       &:hover svg {
         transform: translateX(-5px);
-        transition: transform 1s ease;
+      }
+      div {
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.5s ease;
+        align-self: center;
+        margin-left: 1vh;
+        line-height: 1.4;
+        font-weight: 600;
+      }
+      &:hover div {
+        border-bottom: 2px solid white;
       }
     }
+    a.next {
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      padding: 2vh 3vh;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-content: center;
+      svg {
+        height: 24px;
+        width: 24px;
+        fill: white;
+        transform: translateX(0);
+        transition: transform 0.5s ease;
+      }
+      &:hover svg {
+        transform: translateX(5px);
+      }
+      div {
+        border-top: 2px solid transparent;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.5s ease;
+        align-self: center;
+        margin-right: 1vh;
+        line-height: 1.4;
+        font-weight: 600;
+      }
+      &:hover div {
+        border-bottom: 2px solid white;
+      }
+    }
+  }
+}
+
+.left,
+.right,
+.slide-fade-up {
+  visibility: hidden;
+}
+.left {
+  transform: translateX(-100vw);
+}
+.right {
+  transform: translateX(100vw);
+}
+.slide-fade-up {
+  transform: translateY(100vh);
+}
+@keyframes slideLeft {
+  from {
+    transform: translateX(-100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes slideRight {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes slideFadeUp {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+    visibility: visible;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes pullFocus {
+  from {
+    filter: blur(100px);
+  }
+  to {
+    filter: blur(10px);
   }
 }
