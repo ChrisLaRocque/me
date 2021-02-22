@@ -1,0 +1,84 @@
+.skill-table-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  .skill-table {
+    // overflow-y: hidden;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9px);
+    padding: 2vh 3vh;
+    border-radius: 12px;
+    .skill-table-item {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      label {
+        position: relative;
+        z-index: 1;
+        svg {
+          height: 48px;
+          width: 48px;
+        }
+      }
+      meter {
+        position: relative;
+        z-index: 1;
+        min-width: 22vw;
+        min-height: 4vh;
+        padding-left: 2vh;
+        // -webkit-appearance: none;
+      }
+      meter::-webkit-meter-bar {
+        background: rgba(
+          0,
+          0,
+          0,
+          0.25
+        ); /* Required to get rid of the default background property */
+        border: none;
+      }
+      .skill-blurb-container {
+        position: absolute;
+        z-index: 10;
+        height: 110%;
+        width: 110%;
+        clip-path: circle(0% at 4vh 2vh);
+        transform: translate(-2.5%, -5%);
+        .skill-blurb {
+          padding: 6vh 4vh 3vh 10vh;
+          background-color: white;
+          color: black;
+          border-radius: 24px;
+          -webkit-box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+          box-shadow: 0px -5px 29px -8px rgba(0, 0, 0, 0.6);
+          p {
+            font-size: 90%;
+          }
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        z-index: 2;
+        label,
+        meter {
+          z-index: 11;
+        }
+        label {
+          svg {
+            border-radius: 50%;
+            transition: box-shadow 0.35s ease-in-out;
+            -webkit-box-shadow: 0px 5px 20px -8px rgba(0, 0, 0, 1);
+            box-shadow: 0px 5px 20px -8px rgba(0, 0, 0, 1);
+          }
+        }
+        .skill-blurb-container {
+          transition: all 0.7s ease-in-out;
+          clip-path: circle(125%);
+          &.blurb-long {
+            clip-path: circle(175%);
+          }
+        }
+      }
+    }
+  }
+}
