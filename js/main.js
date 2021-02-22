@@ -73,8 +73,8 @@ new fullpage("#fullpage", {
   autoScrolling: true,
   navigation: false,
   anchors: ["top", "projects", "skills"],
-  resetSliders: true,
-  resetSlidersKey: "EABFDA98-73DE4B01-93828DBA-8CF7CEEA",
+  // resetSliders: true,
+  // resetSlidersKey: "EABFDA98-73DE4B01-93828DBA-8CF7CEEA",
   controlArrows: false,
 });
 
