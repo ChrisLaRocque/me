@@ -73,8 +73,8 @@ new fullpage("#fullpage", {
   autoScrolling: true,
   navigation: false,
   anchors: ["top", "projects", "skills"],
-  // resetSliders: true,
-  // resetSlidersKey: "EABFDA98-73DE4B01-93828DBA-8CF7CEEA",
+  resetSliders: true,
+  resetSlidersKey: "bGFyb2NxdWUuZGV2X2w1N2NtVnpaWFJUYkdsa1pYSno4Nmw=",
   controlArrows: false,
 });
 
@@ -144,20 +144,21 @@ skillTables.forEach((skillTable) => {
 
 
 const fullPagePosition = new MutationObserver(function(mutations) {
-	const bgElement = document.querySelector('.gradient');
-	console.log(bgElement)
+	
+  
 	mutations.forEach(function(mutationRecord) {
+    console.log(mutationRecord.target.style.transform)
 			let regExp = /\(([^)]+)\)/;
 			let translationVals = (regExp.exec(mutationRecord.target.style.transform)[1]).split(', ')
 			let xPx = translationVals[0]
 			let yPx = translationVals[1]
 			let yNum = (yPx.replace('px', '')).replace('-', '')
-
-			bgElement.style.backgroundImage = `linear-gradient(${yNum}deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);`
-			console.log(bgElement.style)
 			// Remove 3rd value in translationVals[1] and use that x/y to set background-position on #fullpage
 	});    
 });
 
 let fpWrapper = document.getElementById('fullpage');
 fullPagePosition.observe(fpWrapper, { attributes : true, attributeFilter : ['style'] });
+
+const bgElement = document.querySelector('.gradient');
+bgElement.style.background = 'linear-gradient(180deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);'
