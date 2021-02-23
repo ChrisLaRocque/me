@@ -119,16 +119,32 @@ const slideFadeUp = new IntersectionObserver(function (entries) {
     }
   });
 });
-const pullFocus = new IntersectionObserver(function (entries) {
+const bgRotate = new IntersectionObserver(function (entries) {
+  let gradient = document.querySelector('.gradient')
+  const sectionDeg = {
+    "header-header":"0deg",
+    "projects-header":"45deg",
+    "skills-header":"90deg"
+  }
+  const sectionY= {
+    "header-header":"0px",
+    "projects-header":"-900px",
+    "skills-header":"-1800px"
+  }
+
   entries.forEach((entry) => {
-    let blur = entry.target.querySelector(".blur");
-    // console.log('found a blur')
     if (entry.intersectionRatio > 0) {
-      blur.style.animation = `pullFocus 1s forwards ease-in-out`;
-      // console.log('set the animation on', entry.target, " to ", entry.target.style.animation)
+      // entry.target.classList[1]
+      // gradient.style.transform = `rotate(${sectionDeg[entry.target.classList[1]]})`
+      gradient.style.backgroundPositionY = sectionY[entry.target.classList[1]]
     }
   });
 });
+
+const sectionElems = document.querySelectorAll(".section-header")
+sectionElems.forEach(elem => {
+  bgRotate.observe(elem)
+})
 
 const skillsSection = document.querySelector(".skills");
 const skillTables = document.querySelectorAll(".skill-table");
@@ -138,27 +154,46 @@ slideIn.observe(skillsSection);
 skillTables.forEach((skillTable) => {
   slideFadeUp.observe(skillTable);
 });
-// sections.forEach(section => {
-// 	pullFocus.observe(section)
-// })
-
 
 const fullPagePosition = new MutationObserver(function(mutations) {
-	
-  
-	mutations.forEach(function(mutationRecord) {
-    console.log(mutationRecord.target.style.transform)
-			let regExp = /\(([^)]+)\)/;
-			let translationVals = (regExp.exec(mutationRecord.target.style.transform)[1]).split(', ')
-			let xPx = translationVals[0]
-			let yPx = translationVals[1]
-			let yNum = (yPx.replace('px', '')).replace('-', '')
-			// Remove 3rd value in translationVals[1] and use that x/y to set background-position on #fullpage
-	});    
+  // let gradients = document.querySelectorAll('.gradient');
+  // let docStyle = document.documentElement.style
+	// mutations.forEach(function(mutationRecord) {
+  //   let regExp = /\(([^)]+)\)/;
+  //   let translationVals = (regExp.exec(mutationRecord.target.style.transform)[1]).split(', ')
+  //   let xPx = translationVals[0]
+  //   let yPx = translationVals[1]
+  //   let yNum = (yPx.replace('px', '')).replace('-', '')
+  //   let degStart = (360 * (yNum / 2400))
+  //   let degEnd = (360 * (yNum / 2400))
+  //   let lastDeg = degEnd - 180
+
+  //   let ratio = (degEnd - lastDeg) / 9
+    
+
+  //   gradients.forEach(gradient => {
+  //     docStyle.setProperty('--deg-0', `${lastDeg}deg`)
+      
+  //     for(let i = 1; i < 9; i++){
+  //       docStyle.setProperty(`--deg-${i}`, `${ratio * i}deg`)
+  //     }
+  //     docStyle.setProperty('--deg-10', `${degEnd}deg`)
+  //     // gradient.style.background = `linear-gradient(${degStart}deg,#4158d0 0%,#c850c0 46%,#ffcc70 100%)`
+  //     gradient.style.animation = `bgRotate 1s forwards ease-in-out`;
+  //   })
+	// });
+  let gradient = document.querySelector('.gradient')
+  mutations.forEach((mutationRecord) => {
+    // console.log(mutationRecord)
+    // console.log(gradient.style)
+    let regExp = /\(([^)]+)\)/;
+    let translationVals = (regExp.exec(mutationRecord.target.style.transform)[1]).split(', ')
+    let xPx = translationVals[0]
+    let yPx = translationVals[1]
+    let yNum = (yPx.replace('px', '')).replace('-', '')
+  })    
 });
 
 let fpWrapper = document.getElementById('fullpage');
-fullPagePosition.observe(fpWrapper, { attributes : true, attributeFilter : ['style'] });
+// fullPagePosition.observe(fpWrapper, { attributes : true, attributeFilter : ['style'] });
 
-const bgElement = document.querySelector('.gradient');
-bgElement.style.background = 'linear-gradient(180deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);'

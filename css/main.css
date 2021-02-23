@@ -113,15 +113,6 @@
   font-family: "Roboto", sans-serif;
 }
 
-.gradient {
-  background-color: #4158d0;
-  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%, #ffcc70 100%);
-  background-position: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 h1,
 h2,
 h3,
@@ -144,6 +135,18 @@ h2 {
 
 h3 {
   font-size: 3.4vh;
+}
+
+.gradient {
+  background-color: #41b4d0;
+  background-image: linear-gradient(43deg, #41b4d0 0%, #4158d0 33%, #c850c0 66%, #ffcc70 100%);
+  background-position: center;
+  position: absolute;
+  width: 100%;
+  min-height: 500vh;
+  height: 100%;
+  -webkit-transition: background-position-y 2s ease-in-out;
+  transition: background-position-y 2s ease-in-out;
 }
 
 .section {
